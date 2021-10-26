@@ -15,7 +15,7 @@
         {{ new Date(sevenDaysForecast[0].dt * 1000) | datePartOne }} -
         {{ new Date(sevenDaysForecast[6].dt * 1000) | datePartTwo }}
       </div>
-      <div class="currentWeather">
+      <div class="currentWeather" v-if="this.sevenDaysForecast != ''">
         {{ Math.round(sevenDaysForecastAverageTemp) }}°
       </div>
       </div>

@@ -16,8 +16,8 @@ data(){
     return{
       api_key: '8f288937c61ed29da70bef79d04dc768',
       url_base: 'https://api.openweathermap.org/data/2.5/',
-      city: 'Novi Sad',
-      countryCode: 'RS',
+      city: '',
+      countryCode: '',
     }
 },
 computed:{
@@ -42,10 +42,10 @@ methods:{
       this.countryCode = iso2
      }
 },
-created(){
-     this.getSevenDaysForecast();
-     this.fetchWeather();
-  }
+// created(){
+//      this.getSevenDaysForecast();
+//      this.fetchWeather();
+//   }
 }
 </script>
 
@@ -71,7 +71,7 @@ outline: none;
 background: white;
 cursor: pointer;
 margin-bottom: 2px;
-margin-left: -50px;
+margin-left: -40px;
 }
 .icon{
   border: none;
@@ -79,8 +79,8 @@ margin-left: -50px;
 .countryCode{
   background: white;
   margin-right: 12px;
-  padding-top: 1px;
-  padding-bottom: 2px;
+  padding-top: 0.5px;
+  padding-bottom: 2.5px;
   border-radius: 4px;
 }
 input:focus{

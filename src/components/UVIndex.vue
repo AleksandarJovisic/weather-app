@@ -1,5 +1,5 @@
 <template>
-  <div class="pollutionInfo" :class="pollutionClass">
+  <div class="pollutionInfo" :class="pollutionClass" v-if="this.UVIndex != ''">
     <i class="fas fa-radiation-alt uv-icon"></i><br />
     <div class="pollutionHeadline">UV Index</div>
     <!-- {{sevenDaysForecastCity}}<br /> -->
