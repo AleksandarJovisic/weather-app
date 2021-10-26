@@ -7,16 +7,20 @@ export default new Vuex.Store({
   state: {
     tenDaysForecast:[],
     tenDaysForecastCity:'',
-    sevenDaysForecast:{},
+    sevenDaysForecast:[],
     sevenDaysForecastCity:'',
     api_key: '8f288937c61ed29da70bef79d04dc768',
     url_base: 'https://api.openweathermap.org/data/2.5/',
     weather:{},
     lat:'',
     lon:'',
-    averageTemperature: ''
+    averageTemperature: '',
+    pollutionData:''
   },
   mutations: {
+    setPollutionData(state, payload){
+      state.pollutionData = payload
+    },
     setTenDaysForecast(state, payload){
       state.tenDaysForecast = payload
     },
@@ -34,6 +38,7 @@ export default new Vuex.Store({
       state.sevenDaysForecastCity = payload
     },
     setSevenDaysForecast(state,payload){
+      payload.shift();
       state.sevenDaysForecast = payload
     },
     setResults (state, results) {
@@ -54,6 +59,11 @@ export default new Vuex.Store({
               fetch(`${state.url_base}onecall?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
                 return res.json().then(res => {
                   commit('setSevenDaysForecast', res.daily)
+                })
+              })
+              fetch(`${state.url_base}air_pollution?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
+                return res.json().then(res => {
+                  commit('setPollutionData', res)
                 })
               })
             }

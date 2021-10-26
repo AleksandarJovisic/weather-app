@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
+  <div class="home row">
+    <div class="col-12">
 <current-wheater-component />
+    </div>
+
   </div>
 </template>
 
@@ -13,3 +16,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.row{
+  margin: 0;
+}
+</style>
