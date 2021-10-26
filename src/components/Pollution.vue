@@ -78,9 +78,9 @@ background: rgb(240, 137, 137);
 color: rgb(218, 40, 40);    
 }
 .Bad{
-  border: 5px solid rgb(219, 7, 7);
+  border: 5px solid rgb(126, 3, 3);
 background: rgb(241, 86, 86);
-color: rgb(219, 7, 7);   
+color: rgb(126, 3, 3);   
 }
 .pollutionDescription{
   margin-top: 16%;

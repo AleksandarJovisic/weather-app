@@ -15,11 +15,15 @@ export default new Vuex.Store({
     lat:'',
     lon:'',
     averageTemperature: '',
-    pollutionData:''
+    pollutionData:'',
+    UVIndex:''
   },
   mutations: {
     setPollutionData(state, payload){
       state.pollutionData = payload
+    },
+    setUVIndex(state, payload){
+      state.UVIndex = payload
     },
     setTenDaysForecast(state, payload){
       state.tenDaysForecast = payload
@@ -59,6 +63,7 @@ export default new Vuex.Store({
               fetch(`${state.url_base}onecall?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
                 return res.json().then(res => {
                   commit('setSevenDaysForecast', res.daily)
+                  commit('setUVIndex',res.current.uvi)
                 })
               })
               fetch(`${state.url_base}air_pollution?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {

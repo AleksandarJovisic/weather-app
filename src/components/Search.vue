@@ -1,8 +1,12 @@
 <template>
-        <div class="col-6 offset-3">
-<vue-country-code class="countryCode" @onSelect="onSelect" defaultCountry='RS'></vue-country-code>
-      <input class="locationInput" v-model="city" v-on:keyup.enter="getSevenDaysForecast();fetchWeather()">
-      <button @click="getSevenDaysForecast();fetchWeather()" class="searchButton"><i class="icon fas fa-search" type='button' ></i></button>
+      <div class="col-4 offset-4">
+        <div class="search-div">
+        <img class="image" src="../assets/sun.png">
+        <vue-country-code class="countryCode" @onSelect="onSelect" defaultCountry='RS'></vue-country-code>
+        <input class="locationInput" v-model="city" v-on:keyup.enter="getSevenDaysForecast();fetchWeather()">
+        <button @click="getSevenDaysForecast();fetchWeather()" class="searchButton"><i class="icon fas fa-search" type='button' ></i></button>
+        </div>
+        
       </div>
 </template>
 
@@ -46,13 +50,28 @@ created(){
 </script>
 
 <style scoped>
+.image{
+  width: 7%;
+  height: 7%;
+  margin-right: 12px;
+  margin-left: 12px;
+  float: left;
+}
+.search-div{
+  background: white;
+  height: auto;
+  margin-top: 200px;
+  border-radius: 16px;
+  padding: 20px;
+}
 .searchButton{
-height: 41px;
-border-radius: 0px 4px 4px 0 ;
+height: 38px;
 border: none;
+outline: none;
 background: white;
 cursor: pointer;
 margin-bottom: 2px;
+margin-left: -50px;
 }
 .icon{
   border: none;
@@ -68,12 +87,12 @@ input:focus{
     outline: none;
 }
 .locationInput{
-  margin-top: 200px;
-border-radius: 4px 0 0 4px;
+border-radius: 4px;
 height: 41px;
-width: 250px !important;
-border: none;
+border: 1px solid rgb(182, 178, 178);
+width: 72%;
 padding-left: 12px;
+padding-right: 50px;
 font-size: 16px;
 font-weight: 600;
 color: rgb(58, 56, 56);
