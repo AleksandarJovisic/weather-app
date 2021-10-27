@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -16,9 +17,13 @@ export default new Vuex.Store({
     lon:'',
     averageTemperature: '',
     pollutionData:'',
-    UVIndex:''
+    UVIndex: null,
+    searchError: ''
   },
   mutations: {
+    setSearchError(state, payload){
+      state.searchError = payload
+    },
     setPollutionData(state, payload){
       state.pollutionData = payload
     },
@@ -53,27 +58,36 @@ export default new Vuex.Store({
       state.lon = payload.lon
     }
   },
-  actions: {  
+  actions: { 
     getSevenDaysForecast({commit, state}, payload){
-        fetch(`${state.url_base}weather?q=${payload}&units=metric&APPID=${state.api_key}`)
-          .then(res => {
-            commit('setSevenDaysForecastCity', payload)
-            return res.json().then(res => {
-              commit('setLatitudeAndLongitude', res.coord)
-              fetch(`${state.url_base}onecall?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
-                return res.json().then(res => {
-                  commit('setSevenDaysForecast', res.daily)
-                  commit('setUVIndex',res.current.uvi)
-                })
-              })
-              fetch(`${state.url_base}air_pollution?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
-                return res.json().then(res => {
-                  commit('setPollutionData', res)
-                })
-              })
-            }
-            )
-          })
+      axios.get(`${state.url_base}onecall?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
+        commit('setSevenDaysForecast', res.data.daily);
+        commit('setUVIndex',res.data.current.uvi);
+        commit('setSearchError','');
+      })
+    },
+    getPollutionData({commit, state}, payload){
+      axios.get(`${state.url_base}air_pollution?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
+        commit('setPollutionData', res.data);
+      })
+    },
+    errorInSearch({commit}, err){
+      commit('setSearchError',err.response.data.message + ', please try again.');
+      commit('setSevenDaysForecast', []);
+      commit('setUVIndex', null);
+      commit('setPollutionData', '');
+      commit('setSevenDaysForecastCity', '');
+      commit('setLatitudeAndLongitude', '');
+    }, 
+    getData({commit,dispatch, state}, payload){
+      axios.get(`${state.url_base}weather?q=${payload}&units=metric&APPID=${state.api_key}`).then(res => {
+        commit('setSevenDaysForecastCity', payload);
+        commit('setLatitudeAndLongitude', res.data.coord);
+        dispatch('getSevenDaysForecast', res);
+        dispatch('getPollutionData', res);
+      }).catch(err => {
+        dispatch('errorInSearch', err)
+      })
     }
   },
   modules: {

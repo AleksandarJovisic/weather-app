@@ -2,15 +2,17 @@
       <div class="col-4 offset-4">
         <div class="search-div">
         <img class="image" src="../assets/sun.png">
-        <vue-country-code class="countryCode" @onSelect="onSelect" defaultCountry='RS'></vue-country-code>
-        <input class="locationInput" v-model="city" v-on:keyup.enter="getSevenDaysForecast();fetchWeather()">
-        <button @click="getSevenDaysForecast();fetchWeather()" class="searchButton"><i class="icon fas fa-search" type='button' ></i></button>
+        <vue-country-code class="countryCode" @onSelect="onSelect" 
+        defaultCountry='RS'></vue-country-code>
+        <input class="locationInput" v-model="city" v-on:keyup.enter="getData()">
+        <button @click="getData()" class="searchButton"><i class="icon fas fa-search" type='button' ></i></button>
         </div>
-        
+        <div class="error" v-if="this.searchError != ''">{{this.searchError}}</div>
       </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
 data(){
     return{
@@ -21,35 +23,29 @@ data(){
     }
 },
 computed:{
+      ...mapState({
+      searchError: (state) => state.searchError,
+    }),
    query(){
     return this.city +', '+ this.countryCode
   }
 },
 methods:{
-       getSevenDaysForecast(){
-      this.$store.dispatch('getSevenDaysForecast', this.query)
-    },
-    fetchWeather () {
-        fetch(`${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`)
-          .then(res => {
-            return res.json();
-          }).then(this.setResults);
-    },
-        setResults (results) {
-      this.weather = results;
+       getData(){
+      this.$store.dispatch('getData', this.query);
     },
     onSelect({name, iso2, dialCode}) {
       this.countryCode = iso2
      }
-},
-// created(){
-//      this.getSevenDaysForecast();
-//      this.fetchWeather();
-//   }
+}
 }
 </script>
 
 <style scoped>
+.error{
+  color: rgb(224, 3, 3);
+  text-align: center;
+}
 .image{
   width: 7%;
   height: 7%;
@@ -63,6 +59,7 @@ methods:{
   margin-top: 200px;
   border-radius: 16px;
   padding: 20px;
+  box-shadow: 3px 6px rgb(0, 0, 0, 0.25);
 }
 .searchButton{
 height: 38px;

@@ -25,6 +25,9 @@ computed:{
   ...mapState({
     pollutionData: (state) => state.pollutionData
   }), 
+},
+methods:{
+
 }
 }
 </script>

@@ -6,20 +6,22 @@
     <div class="pollutionDiv">
       <pollution></pollution>
     </div>
-        <div class="uv-index-div">
+    <div class="uv-index-div">
       <UVIndex></UVIndex>
     </div>
     <div class="row">
       <div class="col-2 offset-5 current-weather-column">
- <div class="currentWeatherCity" v-if="sevenDaysForecast[0] != undefined">
-        {{ new Date(sevenDaysForecast[0].dt * 1000) | datePartOne }} -
-        {{ new Date(sevenDaysForecast[6].dt * 1000) | datePartTwo }}
+        <div
+          class="currentWeatherCity"
+          v-if="sevenDaysForecast[0] != undefined"
+        >
+          {{ new Date(sevenDaysForecast[0].dt * 1000) | datePartOne }} -
+          {{ new Date(sevenDaysForecast[6].dt * 1000) | datePartTwo }}
+        </div>
+        <div class="currentWeather" v-if="this.sevenDaysForecast != ''">
+          {{ Math.round(sevenDaysForecastAverageTemp) }}°
+        </div>
       </div>
-      <div class="currentWeather" v-if="this.sevenDaysForecast != ''">
-        {{ Math.round(sevenDaysForecastAverageTemp) }}°
-      </div>
-      </div>
-     
     </div>
     <div class="row">
       <div class="col-12">
@@ -46,7 +48,7 @@ export default {
     SevenDaysForecast,
     Pollution,
     Search,
-    UVIndex
+    UVIndex,
   },
   filters: {
     datePartOne: function (date) {
@@ -84,8 +86,8 @@ export default {
 </script>
 
 <style scoped>
-.current-weather-column{
-margin-top: 50px;
+.current-weather-column {
+  margin-top: 50px;
 }
 .row {
   margin: 0;
@@ -111,8 +113,8 @@ margin-top: 50px;
   right: 150px;
   width: 200px !important;
 }
-.uv-index-div{
-    position: absolute;
+.uv-index-div {
+  position: absolute;
   top: 30px;
   width: 200px !important;
 }
