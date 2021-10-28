@@ -83,9 +83,6 @@ goToDetails(){
   margin-top: 60%;
   font-size: 30px;
   text-align: center;
-  /* font-weight: 800;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 2px; */
 }
 .pollutionValue {
   margin-top: 60%;
@@ -108,5 +105,47 @@ goToDetails(){
 }
 .Bad {
   color: rgb(126, 3, 3);
+}
+@media (max-width: 1200px){
+.card{
+ min-height: 200px;
+}
+.pollutionDescription{
+  margin-top: 10%;
+}
+.pollutionValue{
+  margin-top: 10%;
+}
+}
+@media (max-width: 980px){
+.card{
+ min-height: 160px;
+}
+.pollutionDescription{
+  margin-top: 5%;
+}
+.pollutionValue{
+  margin-top: 3%;
+}
+}
+@media (max-width: 940px){
+.card{
+ min-height: 160px;
+ width: 200px !important;
+}
+.pollutionDescription{
+  margin-top: 4%;
+  font-size: 16px;
+}
+.pollutionValue{
+  margin-top: 4%;
+  font-size: 12px;
+}
+}
+@media (max-width: 540px){
+.card{
+ width: 100% !important;
+ border-radius: 0px;
+}
 }
 </style>

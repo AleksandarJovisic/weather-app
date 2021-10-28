@@ -4,31 +4,23 @@
       <average-ten-days-temperature></average-ten-days-temperature>
       <search></search>
     </div>
-    <div class="pollutionDiv">
-      <pollution></pollution>
-    </div>
-    <div class="uv-index-div">
-      <UVIndex></UVIndex>
-    </div>
     <div class="row">
-      <div class="col-2 offset-5 current-weather-column">
-        <div
-          class="currentWeatherCity"
-          v-if="sevenDaysForecast[0] != undefined"
-        >
-          {{ new Date(sevenDaysForecast[0].dt * 1000) | datePartOne }} -
-          {{ new Date(sevenDaysForecast[6].dt * 1000) | datePartTwo }}
-        </div>
-        <div class="currentWeather" v-if="this.sevenDaysForecast != ''">
-          {{ Math.round(sevenDaysForecastAverageTemp) }}°
-        </div>
-      </div>
+<current-weather></current-weather>
     </div>
     <div class="row">
       <div class="col-12">
         <seven-days-forecast></seven-days-forecast>
       </div>
     </div>
+    <div class="bottom-div">
+        <div class="pollutionDiv">
+      <pollution></pollution>
+    </div>
+    <div class="uv-index-div">
+      <UVIndex></UVIndex>
+    </div>
+    </div>
+
   </div>
 </template>
 
@@ -40,6 +32,7 @@ import Search from "../components/Search.vue";
 import Pollution from "../components/Pollution.vue";
 import UVIndex from "../components/UVIndex.vue";
 import AverageTenDaysTemperature from '../components/AverageTenDaysTemperature.vue';
+import CurrentWeather from '../components/CurrentWeather.vue';
 export default {
   data: function () {
     return {
@@ -51,7 +44,8 @@ export default {
     Pollution,
     Search,
     UVIndex,
-    AverageTenDaysTemperature
+    AverageTenDaysTemperature,
+    CurrentWeather
   },
   filters: {
     datePartOne: function (date) {
@@ -89,26 +83,9 @@ export default {
 </script>
 
 <style scoped>
-.current-weather-column {
-  margin-top: 50px;
-}
+
 .row {
   margin: 0;
-}
-.currentWeather {
-  color: white;
-  font-size: 60px;
-  font-weight: 900;
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
-}
-.currentWeatherCity {
-  margin-top: 24px;
-  color: #3d4f53;
-  font-size: 18px;
-  font-weight: 800;
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
 }
 .pollutionDiv {
   position: absolute;
@@ -122,4 +99,102 @@ export default {
   left: 50px;
   width: 200px !important;
 }
-</style>>
+@media (max-width: 1200px){
+.pollutionDiv {
+  position: absolute;
+  top: 380px;
+  right: 150px;
+  width: 200px !important;
+}
+.uv-index-div {
+  position: absolute;
+  top: 380px;
+  left: 50px;
+  width: 200px !important;
+}
+}
+@media (max-width: 980px){
+.pollutionDiv {
+  position: absolute;
+  top: 380px;
+  right: 200px;
+  width: 150px !important;
+}
+.uv-index-div {
+  position: absolute;
+  top: 380px;
+  left: 50px;
+  width: 150px !important;
+}
+}
+@media (max-width: 940px){
+.pollutionDiv {
+  position: absolute;
+  top: 380px;
+  right: 100px;
+  width: 150px !important;
+}
+.uv-index-div {
+  position: absolute;
+  top: 380px;
+  left: 50px;
+  width: 150px !important;
+}
+}
+@media (max-width: 740px){
+.pollutionDiv {
+  position: absolute;
+  top: 80px;
+  right: 70px;
+  width: 150px !important;
+}
+.uv-index-div {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  width: 150px !important;
+}
+}
+@media (max-width: 620px){
+.pollutionDiv {
+  display: inline-block;
+  position: relative;
+  top: 0px;
+  right: 0px;
+  left: 10%;
+  width: 40% !important;
+}
+.uv-index-div {
+  display: inline-block;
+  position: relative;
+  top: 0px;
+  left: 40%;
+  width: 40% !important;
+}
+.bottom-div{
+  display: inline-block;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+}
+@media (max-width: 540px){
+.pollutionDiv {
+  position: relative;
+  margin-top: 20px;
+  right: 0px;
+  left: 0%;
+  width: 100% !important;
+  margin-bottom: 24px;
+}
+.uv-index-div {
+
+  position: relative;
+  top: 0px;
+  left: 0%;
+  width: 100% !important;
+}
+.bottom-div{
+  display: block;
+}
+}
+</style>

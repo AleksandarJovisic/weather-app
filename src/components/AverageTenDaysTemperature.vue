@@ -3,9 +3,9 @@
     class="main"
     v-if="averageTemperature != null && tenDaysForecast.length > 0"
   >
-  <div class="cityName">
-{{sevenDaysForecastCity}}
-  </div>
+    <div class="cityName">
+      {{ sevenDaysForecastCity }}
+    </div>
     <div class="headline">
       {{ new Date(tenDaysForecast[0].datetime) | moment }} -
       {{ new Date(tenDaysForecast[9].datetime) | moment }}
@@ -34,12 +34,15 @@ export default {
   },
   filters: {
     moment: function (date) {
-      return moment(date).format("MMMM DD");
+      return moment(date).format("MMM DD");
     },
   },
 };
 </script>
 <style scoped>
+.cityName{
+  margin-bottom: 24px;
+}
 .degree {
   font-size: large;
   vertical-align: super;
@@ -63,14 +66,18 @@ export default {
   font-family: "Open Sans", sans-serif;
   padding: 0;
 }
-.cityName{
+.cityName {
   color: white;
   font-size: 50px;
-  font-weight: 600;
-  font-family: "Popins", sans-serif !;
+  font-weight: 500;
+  font-family: "Popins", sans-serif !important;
 }
-/* .degree{
-  font-size: 20px;
-  font-family: 'Open Sans', sans-serif;
-} */
+@media (max-width: 740px){
+.main {
+  margin-top: 10px;
+}
+.cityName {
+  font-size: 40px;
+}
+}
 </style>

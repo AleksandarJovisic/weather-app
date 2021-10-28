@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 offset-4">
+  <div class="col-xl-4 offset-xl-4 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 offset-sm-0 col-12 offset-0">
     <div class="search-div">
       <img class="image" src="../assets/sun.png" />
       <vue-country-code
@@ -49,7 +49,7 @@ export default {
     getTenDaysForecast(){
       this.$store.dispatch("getTenDayForecast", this.query);
     },
-    onSelect({ name, iso2, dialCode }) {
+    onSelect({ iso2 }) {
       this.countryCode = iso2;
     },
     checkConditions(){
@@ -124,5 +124,31 @@ input:focus {
 }
 .inputError{
   border: 3px solid rgb(218, 53, 53);
+}
+@media (max-width: 1420px){
+ .search-div{
+   width: 140%;
+   margin-left: -20%;
+ } 
+}
+@media (max-width: 1300px){
+ .search-div{
+   width: 120%;
+   margin-left: -10%;
+ } 
+}
+@media (max-width: 1200px){
+ .search-div{
+   width: 100%;
+   margin-left: 0%;
+ } 
+}
+@media (max-width: 470px){
+ .image{
+display: none;
+ } 
+ .locationInput{
+   width: 80%;
+ }
 }
 </style>
