@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="row">
+      <average-ten-days-temperature></average-ten-days-temperature>
       <search></search>
     </div>
     <div class="pollutionDiv">
@@ -38,6 +39,7 @@ import SevenDaysForecast from "../components/SevenDaysForecast.vue";
 import Search from "../components/Search.vue";
 import Pollution from "../components/Pollution.vue";
 import UVIndex from "../components/UVIndex.vue";
+import AverageTenDaysTemperature from '../components/AverageTenDaysTemperature.vue';
 export default {
   data: function () {
     return {
@@ -49,6 +51,7 @@ export default {
     Pollution,
     Search,
     UVIndex,
+    AverageTenDaysTemperature
   },
   filters: {
     datePartOne: function (date) {
@@ -116,6 +119,7 @@ export default {
 .uv-index-div {
   position: absolute;
   top: 30px;
+  left: 50px;
   width: 200px !important;
 }
 </style>>

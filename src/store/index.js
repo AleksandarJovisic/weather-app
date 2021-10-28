@@ -12,10 +12,11 @@ export default new Vuex.Store({
     sevenDaysForecastCity:'',
     api_key: '8f288937c61ed29da70bef79d04dc768',
     url_base: 'https://api.openweathermap.org/data/2.5/',
+    api_key_weatherabit: '4450f8446f9f4b4f851ee48aab1cb43d',
     weather:{},
     lat:'',
     lon:'',
-    averageTemperature: '',
+    averageTemperature: null,
     pollutionData:'',
     UVIndex: null,
     searchError: ''
@@ -31,7 +32,9 @@ export default new Vuex.Store({
       state.UVIndex = payload
     },
     setTenDaysForecast(state, payload){
-      state.tenDaysForecast = payload
+      for(let i = 0; i < 10; i++){
+        state.tenDaysForecast.push(payload[i])
+      }
     },
     setAverageTemperatureForBackground(state){
       let sum = 0;
@@ -59,6 +62,12 @@ export default new Vuex.Store({
     }
   },
   actions: { 
+    getTenDayForecast({commit, state}, payload){
+      axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?city=${payload}&key=${state.api_key_weatherabit}`).then(res => {
+        commit('setTenDaysForecast', res.data.data)
+        commit('setAverageTemperatureForBackground')
+      })
+    },
     getSevenDaysForecast({commit, state}, payload){
       axios.get(`${state.url_base}onecall?lat=${state.lat}&lon=${state.lon}&units=metric&APPID=${state.api_key}`).then(res => {
         commit('setSevenDaysForecast', res.data.daily);

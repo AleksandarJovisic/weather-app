@@ -6,7 +6,7 @@
     {{new Date(day.dt * 1000) | moment}}     
      <br />
      <span class="temp">
-  {{Math.round(day.temp.day)}}°
+  {{Math.round(day.temp.day)}}<sup class="degree">&#8451;</sup>
      </span>
    </div>
       </div>
@@ -37,6 +37,10 @@ filters:{
 </script>
 
 <style scoped>
+.degree {
+  font-size: large;
+  vertical-align: super;
+}
 .temp{
   color: white;
   font-size: 40px;
@@ -53,7 +57,7 @@ filters:{
   border-radius: 16px;
   background: transparent;
   border: none;
-  color: #3d4f53;
+  color: #3f4446;
   font-size: 18px;
   font-weight: 800;
   font-family: 'Open Sans', sans-serif;
