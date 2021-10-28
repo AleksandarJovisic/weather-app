@@ -80,7 +80,7 @@ export default {
 .search-div {
   background: white;
   height: auto;
-  margin-top: 260px;
+  margin-top: 280px;
   border-radius: 16px;
   padding: 20px;
   box-shadow: 3px 6px rgb(0, 0, 0, 0.25);

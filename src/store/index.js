@@ -53,8 +53,8 @@ export default new Vuex.Store({
       payload.shift();
       state.sevenDaysForecast = payload
     },
-    setResults (state, results) {
-      state.weather = results;
+    setWeather (state, payload) {
+      state.weather = payload;
     },
     setLatitudeAndLongitude(state, payload){
       state.lat = payload.lat;
@@ -90,6 +90,7 @@ export default new Vuex.Store({
     }, 
     getData({commit,dispatch, state}, payload){
       axios.get(`${state.url_base}weather?q=${payload}&units=metric&APPID=${state.api_key}`).then(res => {
+        commit('setWeather',res.data)
         commit('setSevenDaysForecastCity', payload);
         commit('setLatitudeAndLongitude', res.data.coord);
         dispatch('getSevenDaysForecast', res);
