@@ -68,4 +68,22 @@ export default {
   color: white;
   font-size: 20px;
 }
+@media (max-width: 1400px){
+.infoCard {
+  width: 30%;
+  margin-left: 10%;
+}
+}
+@media (max-width: 800px){
+.infoCard {
+  width: 35%;
+  margin-left: 7.5%;
+}
+}
+@media (max-width: 670px){
+.infoCard {
+  width: 70%;
+  margin-left: 15%;
+}
+}
 </style>
