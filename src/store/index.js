@@ -32,6 +32,7 @@ export default new Vuex.Store({
       state.UVIndex = payload
     },
     setTenDaysForecast(state, payload){
+      state.tenDaysForecast = []
       for(let i = 0; i < 10; i++){
         state.tenDaysForecast.push(payload[i])
       }
