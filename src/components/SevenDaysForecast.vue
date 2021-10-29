@@ -119,10 +119,14 @@ width: 20%;
   margin-left: 22.5%;
 }
 }
+@media (max-width: 550px){
+  .card{
+padding: 2px;
+}
+}
 @media (max-width: 500px){
   .card{
 width: 25%;
-padding: 4px;
 font-size: 14px;
 }
 .bottomRow{
