@@ -56,11 +56,14 @@ export default {
       if (this.city != "" && this.countryCode != "" && this.searchError == "" && this.sevenDaysForecast.length > 0) return true
     }
   },
-  // created() {
-  //   setInterval(() => {
-  //     if (this.checkConditions() == true) this.getData(this.query)
-  //   }, 10000);
-  // },
+  created() {
+    setInterval(() => {
+      if (this.checkConditions() == true) this.getData(this.query)
+    }, 900000);
+        setInterval(() => {
+      if (this.checkConditions() == true) this.getTenDaysForecast(this.query)
+    }, 1800000);
+  },
 };
 </script>
 
